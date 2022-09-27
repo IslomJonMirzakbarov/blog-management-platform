@@ -5,7 +5,7 @@ const userFactory = require("./factories/userFactory");
 let browser, page;
 
 beforeEach(async () => {
-  browser = await puppeteer.launch({ headless: false });
+  browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox"] });
 
   page = await browser.newPage();
 
@@ -40,7 +40,7 @@ test("when signed in, shows logout button", async () => {
   );
   await page.goto("http://localhost:3000");
   await page.waitForSelector('a[href="/auth/logout"]');
-  
+
   const text = await page.$eval('a[href="/auth/logout"]', (el) => el.innerHTML);
 
   expect(text).toEqual("Logout");

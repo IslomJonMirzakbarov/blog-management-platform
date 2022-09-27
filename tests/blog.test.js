@@ -6,7 +6,7 @@ let page;
 let browser;
 
 beforeEach(async () => {
-  browser = await puppeteer.launch({ headless: false });
+  browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox"] });
   page = await browser.newPage();
   await page.goto("http://localhost:3000");
 });
